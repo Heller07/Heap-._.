@@ -1,18 +1,34 @@
-void heapify(int *arr,int n,int i){
-    int largest = i;
-    int left = 2*i;
-    int right = 2*i+1;
+//{ Driver Code Starts
+//Initial function template for C++
 
-    if(left<=n &&arr[largest]<arr[left]){
-        largest = left;
+#include<bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+//User function template for C++
+
+
+class Solution{
+    public:
+    // arr : given array
+    // l : starting index of the array i.e 0
+    // r : ending index of the array i.e size-1
+    // k : find kth smallest element and return using this function
+    int kthSmallest(int arr[], int l, int r, int k) {
+        //code here
+        priority_queue<int> pq;
+        
+        for(int i = 0;i<k;i++){
+            pq.push(arr[i]);
+        }
+        for(int i = k;i<=r;i++){
+            if(arr[i]<pq.top()){
+                pq.pop();
+                pq.push(arr[i]);
+            }
+            
+        }
+        int ans = pq.top();
+        return ans;
     }
-if(right<=n&& arr[largest]<arr[right]){
-    largest = right;
-}
-
-if(largest!=i){
-    swap(arr[largest],arr[i]);
-    heapify(arr,n,largest);
-
-}
-}
+};
